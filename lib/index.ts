@@ -31,13 +31,12 @@ ${renderTp.render(registryTp, this.opts)}
         this.pwa.injectCode(data);
         cb && cb(null, data);
       };
-      // htmlWebpackPlugin v3 for vue cli@4.5.7
-      compilation.plugin("html-webpack-plugin-before-html-processing", run);
       // htmlWebpackPlugin  v4
-      HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapAsync(
+      // htmlWebpackPlugin v3 for vue cli4.5.7
+      HtmlWebpackPlugin.getHooks?HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapAsync(
         pluginId,
         run,
-      );
+      ):compilation.plugin("html-webpack-plugin-before-html-processing", run);
     });
 
     compiler.hooks.emit.tapAsync(pluginId, async (cp, next) => {

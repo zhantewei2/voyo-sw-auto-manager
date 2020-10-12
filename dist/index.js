@@ -30,10 +30,9 @@ ${renderTp_1.renderTp.render(registryTp, this.opts)}
                 this.pwa.injectCode(data);
                 cb && cb(null, data);
             };
-            // htmlWebpackPlugin v3 for vue cli@4.5.7
-            compilation.plugin("html-webpack-plugin-before-html-processing", run);
             // htmlWebpackPlugin  v4
-            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapAsync(base_1.pluginId, run);
+            // htmlWebpackPlugin v3 for vue cli4.5.7
+            HtmlWebpackPlugin.getHooks ? HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapAsync(base_1.pluginId, run) : compilation.plugin("html-webpack-plugin-before-html-processing", run);
         });
         compiler.hooks.emit.tapAsync(base_1.pluginId, async (cp, next) => {
             try {
