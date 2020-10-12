@@ -1,0 +1,7 @@
+.gitignore
+.npmignore
+.eslintrc.js
+tsconfig.json
+/lib
+prettier.config.js
+package-lock.json
